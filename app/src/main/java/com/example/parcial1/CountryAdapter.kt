@@ -18,7 +18,6 @@ class CountryAdapter(
         private val flag: ImageView = itemView.findViewById(R.id.countryFlag)
 
         fun bind(country: Country) {
-            // Cambiamos de country.name.common a country.translations.spa.common
             name.text = country.translations.spa.common
             Glide.with(itemView.context)
                 .load(country.flags.png)

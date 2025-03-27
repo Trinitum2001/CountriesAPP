@@ -27,7 +27,6 @@ class DetailActivity : AppCompatActivity() {
             insets
         }
 
-        //Enlace a los datos del main
         binding.mapWebView.apply {
             settings.javaScriptEnabled = true
             settings.setSupportZoom(true)
