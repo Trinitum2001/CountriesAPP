@@ -1,6 +1,10 @@
 package com.example.parcial1
 
 import android.os.Bundle
+import android.util.Log
+import android.view.View
+import android.webkit.WebViewClient
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -13,8 +17,10 @@ class DetailActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding = ActivityDetailBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
         enableEdgeToEdge()
-        setContentView(R.layout.activity_detail)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -22,22 +28,48 @@ class DetailActivity : AppCompatActivity() {
         }
 
         //Enlace a los datos del main
-        binding = ActivityDetailBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        val country = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
-            intent.getParcelableExtra("country", Country::class.java)
-        } else {
-            @Suppress("DEPRECATION")
-            intent.getParcelableExtra("country")
+        binding.mapWebView.apply {
+            settings.javaScriptEnabled = true
+            settings.setSupportZoom(true)
+            settings.builtInZoomControls = true
+            settings.displayZoomControls = false
+            webViewClient = WebViewClient()
         }
 
+
+        val country =
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
+                intent.getParcelableExtra("country", Country::class.java)
+            } else {
+                @Suppress("DEPRECATION")
+                intent.getParcelableExtra("country")
+            }
+
         if (country != null) {
-            binding.countryName.text = country.name.official
+            binding.countryName.text = country.translations.spa.official ?: country.name.official
             binding.countryRegion.text = country.region
             binding.countryPopulation.text = "Población: ${country.population}"
             Glide.with(this)
                 .load(country.flags.png)
                 .into(binding.countryFlag)
+
+            country.maps.googleMaps.takeIf { it.isNotEmpty() }?.let { mapUrl ->
+                try {
+                    binding.mapWebView?.loadUrl(mapUrl)
+                } catch (e: Exception) {
+                    binding.mapWebView?.visibility = View.GONE
+                    Log.e("DetailActivity", "Error al cargar mapa", e)
+                }
+            } ?: run {
+                binding.mapWebView?.visibility = View.GONE
+            }
         }
+
     }
+    override fun onDestroy() {
+        binding.mapWebView?.destroy()
+        super.onDestroy()
+    }
+
+
 }

@@ -6,8 +6,8 @@
     android:padding="16dp">
     <ImageView
         android:id="@+id/countryFlag"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="100dp"
+        android:layout_height="75dp"
         android:scaleType="centerCrop" />
     <TextView
         android:id="@+id/countryName"

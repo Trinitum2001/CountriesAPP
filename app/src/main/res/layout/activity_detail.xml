@@ -11,8 +11,8 @@
 
     <ImageView
         android:id="@+id/countryFlag"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="250dp"
+        android:layout_height="150dp"
         android:scaleType="centerCrop"
         tools:layout_editor_absoluteX="1dp"
         tools:layout_editor_absoluteY="64dp" />
@@ -20,19 +20,24 @@
         android:id="@+id/countryName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="16dp"
+        android:textSize="26dp"
         android:layout_marginTop="16dp"/>
     <TextView
         android:id="@+id/countryRegion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="8dp"
+        android:textSize="18dp"
         android:layout_marginTop="8dp"/>
     <TextView
         android:id="@+id/countryPopulation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
+        android:textSize="28sp"
         android:layout_marginTop="8dp"/>
+    <WebView
+        android:id="@+id/mapWebView"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:layout_marginTop="16dp" />
 
 </LinearLayout>
