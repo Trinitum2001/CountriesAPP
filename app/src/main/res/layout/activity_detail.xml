@@ -14,26 +14,31 @@
         android:layout_width="250dp"
         android:layout_height="150dp"
         android:scaleType="centerCrop"
+        android:layout_marginLeft="3dp"
         tools:layout_editor_absoluteX="1dp"
         tools:layout_editor_absoluteY="64dp" />
     <TextView
         android:id="@+id/countryName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textStyle="bold"
         android:textSize="26dp"
+        android:textColor="@color/black"
         android:layout_marginTop="16dp"/>
     <TextView
         android:id="@+id/countryRegion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="18dp"
-        android:layout_marginTop="8dp"/>
+        android:textSize="20dp"
+        android:textColor="@color/black"
+        android:layout_marginTop="11dp"/>
     <TextView
         android:id="@+id/countryPopulation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="28sp"
-        android:layout_marginTop="8dp"/>
+        android:textColor="@color/black"
+        android:layout_marginTop="11dp"/>
     <WebView
         android:id="@+id/mapWebView"
         android:layout_width="match_parent"
